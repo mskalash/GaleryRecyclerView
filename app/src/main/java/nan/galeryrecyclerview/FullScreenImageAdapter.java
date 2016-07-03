@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class FullScreenImageAdapter extends PagerAdapter {
@@ -64,16 +63,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
 				_activity.finish();
 			}
 		});
-		del.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			//не работает
-				File delfile = new File(
-						android.os.Environment.getExternalStorageDirectory()
-								+ File.separator + AppConstant.PHOTO_ALBUM+_imagePaths.get(position));
-				delfile.delete();
-			}
-		});
+
 		((ViewPager) container).addView(viewLayout);
  
         return viewLayout;
