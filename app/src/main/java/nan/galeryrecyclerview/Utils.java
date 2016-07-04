@@ -21,7 +21,7 @@ public class Utils {
 	}
 
 	/*
-	 * Чтения фаилов с папки
+	 * Чтение filePach из папки
 	 */
 	public ArrayList<String> getFilePaths() {
 		ArrayList<String> filePaths = new ArrayList<String>();
@@ -32,39 +32,37 @@ public class Utils {
 
 		// проверка директории
 		if (directory.isDirectory()) {
-
 			File[] listFiles = directory.listFiles();
 
-
+			// Проверка вывода
 			if (listFiles.length > 0) {
 
-
 				for (int i = 0; i < listFiles.length; i++) {
-
 
 					String filePath = listFiles[i].getAbsolutePath();
 
 					// Проверка на поддержку фаилов
 					if (IsSupportedFile(filePath)) {
-
+						// Добовление imagePach в arreylist
 						filePaths.add(filePath);
 					}
 				}
 			} else {
-
 				Toast.makeText(
 						_context,
 						AppConstant.PHOTO_ALBUM
-								+ " is empty. Please load some images in it !",
+								+ " директория пуста. Загрузите изображения  ",
 						Toast.LENGTH_LONG).show();
 			}
 
 		} else {
+
 			AlertDialog.Builder alert = new AlertDialog.Builder(_context);
-			alert.setTitle("Error!");
+			alert.setTitle("Внимание!");
 			alert.setMessage(AppConstant.PHOTO_ALBUM
-					+ " directory path is not valid! Please set the image directory name AppConstant.java class");
+					+ " создана пожалуйста наполните её изображениями.");
 			alert.setPositiveButton("OK", null);
+			directory.mkdir();
 			alert.show();
 		}
 
@@ -94,7 +92,7 @@ public class Utils {
 		final Point point = new Point();
 		try {
 			display.getSize(point);
-		} catch (NoSuchMethodError ignore) { // Старые устройства
+		} catch (NoSuchMethodError ignore) { // Для старых девайсов
 			point.x = display.getWidth();
 			point.y = display.getHeight();
 		}
